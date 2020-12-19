@@ -1,20 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'antd';
+import ThemedButton from 'ThemedButton';
 import 'App.css';
 
 class PostDetail extends React.Component {
+  static propTypes = {
+    postId: PropTypes.number.isRequired,
+  };
+
   state = {
     postDetail: null,
-  }
+  };
 
   componentDidMount() {
-    const {postId} = this.props;
+    const { postId } = this.props;
     this.requestPost(postId);
   }
 
   componentDidUpdate(prevProps) {
     const { postId } = this.props;
-    if ( postId != prevProps.postId ) {
+    if (postId != prevProps.postId) {
       this.requestPost(postId);
     }
   }
@@ -22,14 +28,14 @@ class PostDetail extends React.Component {
   requestPost(postId) {
     console.log(`request post #${postId}`);
     this.setState({
-      postDetail: null
+      postDetail: null,
     });
 
-    setTimeout( () => {
+    setTimeout(() => {
       this.setState({
-        postDetail: `로딩된 post #${postId}`
-      })
-    }, 3000 );
+        postDetail: `로딩된 post #${postId}`,
+      });
+    }, 3000);
   }
 
   render() {
@@ -38,23 +44,26 @@ class PostDetail extends React.Component {
     return (
       <div>
         포스팅 #{postId}
-        <hr/>
-        {!postDetail && "로딩 중 ..."}
+        <hr />
+        {!postDetail && '로딩 중 ...'}
         {postDetail}
       </div>
-    )
+    );
   }
 }
 
 class App extends React.Component {
   state = {
-    postId: 10
-  }
+    postId: 10,
+  };
   render() {
     return (
       <div>
+        <ThemedButton theme="success" label="Say Hello" />
         <PostDetail postId={this.state.postId} />
-        <Button onClick={ () => this.setState({ postId: 20}) }>postId 변경</Button>
+        <Button onClick={() => this.setState({ postId: 20 })}>
+          postId 변경
+        </Button>
       </div>
     );
   }
