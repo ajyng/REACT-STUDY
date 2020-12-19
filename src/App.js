@@ -1,70 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'antd';
-import ThemedButton from 'ThemedButton';
+import Counter from 'Counter';
 import 'App.css';
 
-class PostDetail extends React.Component {
-  static propTypes = {
-    postId: PropTypes.number.isRequired,
-  };
-
-  state = {
-    postDetail: null,
-  };
-
-  componentDidMount() {
-    const { postId } = this.props;
-    this.requestPost(postId);
-  }
-
-  componentDidUpdate(prevProps) {
-    const { postId } = this.props;
-    if (postId != prevProps.postId) {
-      this.requestPost(postId);
-    }
-  }
-
-  requestPost(postId) {
-    console.log(`request post #${postId}`);
-    this.setState({
-      postDetail: null,
-    });
-
-    setTimeout(() => {
-      this.setState({
-        postDetail: `로딩된 post #${postId}`,
-      });
-    }, 3000);
-  }
-
-  render() {
-    const { postId } = this.props;
-    const { postDetail } = this.state;
-    return (
-      <div>
-        포스팅 #{postId}
-        <hr />
-        {!postDetail && '로딩 중 ...'}
-        {postDetail}
-      </div>
-    );
-  }
-}
-
 class App extends React.Component {
-  state = {
-    postId: 10,
+  state = { myquery: '', language: ''}
+
+  onChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value,
+    });
   };
+
   render() {
     return (
-      <div>
-        <ThemedButton theme="success" label="Say Hello" />
-        <PostDetail postId={this.state.postId} />
-        <Button onClick={() => this.setState({ postId: 20 })}>
-          postId 변경
-        </Button>
-      </div>
+      <>
+        <Counter onClick={ () => console.log('clicked!')} />
+        <input name="myquery" onChange={this.onChange} />
+        <input name="language" onChange={this.onChange} />
+
+        <hr />
+        {JSON.stringify(this.state)}
+      </>
     );
   }
 }
