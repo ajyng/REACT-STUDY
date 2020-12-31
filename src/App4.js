@@ -30,6 +30,16 @@ function PostDetail({ postId }) {
     );
 }
 
+function Clock() {
+    const [date, setDate] = useState(new Date());
+    useEffect( () => {
+        const interval = setInterval( () => setDate(new Date()), 1000 );
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
+    return <div>현재 시각은 {date.toISOString().slice(11, 19)}입니다.</div>;
+}
 
 function App2() {
     const [value1, setValue1] = useState(0); // getter, setter
@@ -52,6 +62,7 @@ function App2() {
 
     return (
         <div>
+            <Clock />
             Hello App2
             <hr />
             {JSON.stringify(value)}
