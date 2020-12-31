@@ -7,13 +7,17 @@ import App3 from './App3';
 import App4 from './App4';
 import App5 from './App5';
 import App6 from './App6';
+import App7 from './App7';
+import App8 from './App8';
+import App9 from './App9';
+
 import TodoList from 'TodoList';
 import EpisodeList from 'EpisodeList';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App6 />
+    <App9 />
   </React.StrictMode>,
   document.getElementById('root')
 );
